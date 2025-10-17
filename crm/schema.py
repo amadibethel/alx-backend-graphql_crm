@@ -141,3 +141,5 @@ class ProductNode(DjangoObjectType):
         model = Product
         filterset_class = ProductFilter
         interf
+"all_customers =
+all_customers =
