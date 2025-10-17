@@ -8,3 +8,5 @@ class Query(graphene.ObjectType):
 
 schema = graphene.Schema(query=Query)
 
+class Query(CRMQuery, graphene.ObjectType)
+
