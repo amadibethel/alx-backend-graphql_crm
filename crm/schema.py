@@ -1,8 +1,10 @@
 import graphene
 from graphene_django import DjangoObjectType
-from .models import Customer, Product, Order
+from graphene_django.filter import DjangoFilterConnectionField
 from django.core.exceptions import ValidationError
 from django.db import transaction
+from .models import Customer, Product, Order
+from .filters import CustomerFilter, ProductFilter, OrderFilter
 
 # ===== GraphQL Types =====
 class CustomerType(DjangoObjectType):
@@ -24,8 +26,6 @@ class OrderType(DjangoObjectType):
 
 
 # ===== Mutations =====
-
-# --- CreateCustomer ---
 class CreateCustomer(graphene.Mutation):
     class Arguments:
         name = graphene.String(required=True)
@@ -44,7 +44,6 @@ class CreateCustomer(graphene.Mutation):
         return CreateCustomer(customer=customer, message="Customer created successfully.")
 
 
-# --- BulkCreateCustomers ---
 class BulkCreateCustomers(graphene.Mutation):
     class Arguments:
         input = graphene.List(
@@ -81,7 +80,6 @@ class BulkCreateCustomers(graphene.Mutation):
         return BulkCreateCustomers(customers=created_customers, errors=errors)
 
 
-# --- CreateProduct ---
 class CreateProduct(graphene.Mutation):
     class Arguments:
         name = graphene.String(required=True)
@@ -101,7 +99,6 @@ class CreateProduct(graphene.Mutation):
         return CreateProduct(product=product)
 
 
-# --- CreateOrder ---
 class CreateOrder(graphene.Mutation):
     class Arguments:
         customer_id = graphene.ID(required=True)
@@ -131,25 +128,16 @@ class CreateOrder(graphene.Mutation):
         return CreateOrder(order=order)
 
 
-# ===== Root Mutation & Query =====
-class Mutation(graphene.ObjectType):
-    create_customer = CreateCustomer.Field()
-    bulk_create_customers = BulkCreateCustomers.Field()
-    create_product = CreateProduct.Field()
-    create_order = CreateOrder.Field()
+# ===== Filtered GraphQL Nodes =====
+class CustomerNode(DjangoObjectType):
+    class Meta:
+        model = Customer
+        filterset_class = CustomerFilter
+        interfaces = (graphene.relay.Node,)
 
 
-class Query(graphene.ObjectType):
-    customers = graphene.List(CustomerType)
-    products = graphene.List(ProductType)
-    orders = graphene.List(OrderType)
-
-    def resolve_customers(root, info):
-        return Customer.objects.all()
-
-    def resolve_products(root, info):
-        return Product.objects.all()
-
-    def resolve_orders(root, info):
-        return Order.objects.all()
-
+class ProductNode(DjangoObjectType):
+    class Meta:
+        model = Product
+        filterset_class = ProductFilter
+        interf
