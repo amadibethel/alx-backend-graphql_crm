@@ -143,3 +143,6 @@ class ProductNode(DjangoObjectType):
         interf
 "all_customers =
 all_customers =
+class Mutation(graphene.ObjectType
+create_customer = CreateCustomer.Field()
+class Query(graphene.ObjectType):
