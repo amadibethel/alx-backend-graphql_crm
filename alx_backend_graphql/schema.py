@@ -10,3 +10,4 @@ schema = graphene.Schema(query=Query)
 
 class Query(CRMQuery, graphene.ObjectType)
 
+from crm.schema import
