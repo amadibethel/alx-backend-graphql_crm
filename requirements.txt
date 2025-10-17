@@ -1,0 +1,4 @@
+Django>=4.2
+graphene-django>=3.2
+django-filter>=23.2
+
