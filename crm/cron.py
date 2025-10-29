@@ -30,3 +30,4 @@ def log_crm_heartbeat():
         logging.error(f"GraphQL heartbeat check failed: {e}")
 
 from gql.transport.requests import RequestsHTTPTransport", "from gql import", "gql", "Client"
+"/tmp/low_stock_updates_log.txt"

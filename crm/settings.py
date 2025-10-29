@@ -4,3 +4,4 @@ INSTALLED_APPS = [
     'crm',
 ]
 
+"CRONJOBS"
