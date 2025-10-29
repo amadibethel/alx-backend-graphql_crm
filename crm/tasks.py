@@ -46,3 +46,4 @@ def generate_crm_report():
             f.write(f"{timestamp} - Error generating report: {e}\n")
         logging.error(f"Error generating CRM report: {e}")
 
+from datetime import datetime", "import requests"
