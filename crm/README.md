@@ -62,3 +62,39 @@ Uses GraphQL queries per requirement
 
 ---
 
+Install Redis and dependencies
+
+Your README includes:
+
+sudo apt-get install redis-server
+redis-server
+pip install -r requirements.txt
+
+
+Run migrations
+
+Your README includes:
+
+python manage.py migrate
+
+
+Start Celery worker
+
+Your README includes:
+
+celery -A crm worker -l info
+
+
+Start Celery Beat
+
+Your README includes:
+
+celery -A crm beat -l info
+
+
+Verify logs
+
+Your README includes:
+
+tail -f /tmp/crm_report_log.txt
+
