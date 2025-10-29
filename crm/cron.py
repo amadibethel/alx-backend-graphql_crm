@@ -29,3 +29,4 @@ def log_crm_heartbeat():
     except Exception as e:
         logging.error(f"GraphQL heartbeat check failed: {e}")
 
+from gql.transport.requests import RequestsHTTPTransport", "from gql import", "gql", "Client"
